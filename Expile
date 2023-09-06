@@ -1,0 +1,164 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("ZfRay", "GrapeTheme")
+
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("MainHacks")
+
+
+MainSection:NewButton("Speed", "Gives you speed.", function()
+ local player = game.Players.LocalPlayer
+
+ local mainGui = Instance.new("ScreenGui")
+  mainGui.Parent = player.PlayerGui
+
+  local frame = Instance.new("Frame")
+  frame.Size = UDim2.new(0, 200, 0, 150)
+  frame.Position = UDim2.new(0.5, -100, 0.5, -75)
+  frame.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+  frame.Parent = mainGui
+
+  local function enableDragging()
+    local dragging = false
+    local dragInput, mousePos, framePos
+
+    frame.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            dragging = true
+            dragInput = input
+            mousePos = input.Position
+            framePos = frame.Position
+        end
+    end)
+
+    frame.InputChanged:Connect(function(input)
+        if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+            local delta = input.Position - mousePos
+            frame.Position = UDim2.new(framePos.X.Scale, framePos.X.Offset + delta.X, framePos.Y.Scale, framePos.Y.Offset + delta.Y)
+        end
+    end)
+
+    frame.InputEnded:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            dragging = false
+        end
+    end)
+ end
+
+  enableDragging()
+
+ local textBox = Instance.new("TextBox")
+ textBox.Size = UDim2.new(0, 180, 0, 30)
+ textBox.Position = UDim2.new(0, 10, 0, 10)
+ textBox.PlaceholderText = "Enter speed"
+ textBox.Parent = frame
+
+ local setSpeedButton = Instance.new("TextButton")
+ setSpeedButton.Size = UDim2.new(0, 180, 0, 30)
+ setSpeedButton.Position = UDim2.new(0, 10, 0, 50)
+ setSpeedButton.Text = "Set Speed"
+ setSpeedButton.Parent = frame
+
+ local function setSpeed()
+     local inputSpeed = tonumber(textBox.Text)
+     if inputSpeed then
+        player.Character.Humanoid.WalkSpeed = inputSpeed
+     end
+ end
+
+ setSpeedButton.MouseButton1Click:Connect(setSpeed)
+end)
+
+MainSection:NewToggle("SuperHuman", "Intense Power as in fly hacks and stuff", function(state)
+    if state then
+        local player = game.Players.LocalPlayer
+        player:Kick("Detected Exploits - Byfron warning")
+        print("Toggle On")
+    else
+        print("Toggle Off")
+    end
+end)
+
+MainSection:NewButton("Jump Power", "Inserts a new ui"
+
+ local player = game.Players.LocalPlayer
+
+
+ local mainGui = Instance.new("ScreenGui")
+ mainGui.Parent = player.PlayerGui
+
+ local frame = Instance.new("Frame")
+ frame.Size = UDim2.new(0, 200, 0, 150)
+ frame.Position = UDim2.new(0.5, -100, 0.5, -75)
+ frame.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+ frame.Parent = mainGui
+
+ local isDragging = false
+ local dragStartPos, frameStartPos
+
+ local function enableDragging()
+     frame.InputBegan:Connect(function(input)
+         if input.UserInputType == Enum.UserInputType.MouseButton1 then
+             isDragging = true
+             dragStartPos = input.Position
+             frameStartPos = frame.Position
+         end
+     end)
+
+     frame.InputChanged:Connect(function(input)
+         if isDragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+             local delta = input.Position - dragStartPos
+             frame.Position = UDim2.new(frameStartPos.X.Scale, frameStartPos.X.Offset + delta.X, frameStartPos.Y.Scale, frameStartPos.Y.Offset + delta.Y)
+         end
+     end)
+
+     frame.InputEnded:Connect(function(input)
+         if input.UserInputType == Enum.UserInputType.MouseButton1 then
+             isDragging = false
+         end
+     end)
+ end
+
+ enableDragging()
+
+
+ local textBox = Instance.new("TextBox")
+ textBox.Size = UDim2.new(0, 180, 0, 30)
+ textBox.Position = UDim2.new(0, 10, 0, 10)
+ textBox.PlaceholderText = "Enter JumpPower"
+ textBox.Parent = frame
+
+ local setJumpPowerButton = Instance.new("TextButton")
+ setJumpPowerButton.Size = UDim2.new(0, 180, 0, 30)
+ setJumpPowerButton.Position = UDim2.new(0, 10, 0, 50)
+ setJumpPowerButton.Text = "Set JumpPower"
+ setJumpPowerButton.Parent = frame
+
+
+ local function setJumpPower()
+     local inputJumpPower = tonumber(textBox.Text)
+     if inputJumpPower then
+         player.Character.Humanoid.JumpPower = inputJumpPower
+     end
+ end
+
+
+  setJumpPowerButton.MouseButton1Click:Connect(setJumpPower)
+end)
+
+local Tab = Window:NewTab("Settings")
+local Section = Tab:NewSection("Settings")
+
+Section:NewToggle("quick leave", "Leave Quickly" function(state)
+    if state then
+        local player = game.Players.LocalPlayer
+        player:Kick("Quick leave")
+        wait(1)
+        player:Kick("Is broken")
+    else
+        player:Kick("Detected Exploits - Byfron warning")
+    end
+end)
+
+Section:NewButton("Infinite yeild","Even better"
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+end)
