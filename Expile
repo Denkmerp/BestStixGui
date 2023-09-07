@@ -78,7 +78,7 @@ MainSection:NewToggle("SuperHuman", "Intense Power as in fly hacks and stuff", f
     end
 end)
 
-MainSection:NewButton("Jump Power", "Inserts a new ui"
+MainSection:NewButton("Jump Power", "Inserts a new ui")
 
  local player = game.Players.LocalPlayer
 
@@ -142,13 +142,12 @@ MainSection:NewButton("Jump Power", "Inserts a new ui"
  end
 
 
-  setJumpPowerButton.MouseButton1Click:Connect(setJumpPower)
-end)
+   setJumpPowerButton.MouseButton1Click:Connect(setJumpPower)
 
 local Tab = Window:NewTab("Settings")
 local Section = Tab:NewSection("Settings")
 
-Section:NewToggle("quick leave", "Leave Quickly" function(state)
+Section:NewToggle("quick leave", "Leave Quickly", function(state)
     if state then
         local player = game.Players.LocalPlayer
         player:Kick("Quick leave")
@@ -159,6 +158,5 @@ Section:NewToggle("quick leave", "Leave Quickly" function(state)
     end
 end)
 
-Section:NewButton("Infinite yeild","Even better"
+Section:NewButton("Infinite yeild","Just loaded up")
     loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
-end)
